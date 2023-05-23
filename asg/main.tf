@@ -3,6 +3,7 @@ resource "ncloud_launch_configuration" "lc" {
   name = var.asg_conf_name
   member_server_image_no = data.ncloud_member_server_image.custom_image.id
   server_product_code = data.ncloud_server_product.product.id
+  init_script_no = var.init_script_no
   login_key_name = var.login_key_name
 }
 

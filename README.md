@@ -3,7 +3,12 @@
 * Naver Cloud Platform 민간존의 한국 리전의 VPC 기준으로 Terraform 모듈을 생성하였습니다.
 
 
-# 버전 기록(V1.0)
+# 버전 기록
+## V1.1
+* initscript 모듈 추가
+* 서버 생성에 관련된 모듈(server, server_img, asg) init script 적용가능하도록 기능 추가
+
+## V1.0
 * 최초 업로드
 
 
@@ -15,6 +20,7 @@
 | natgw | Nat Gateway 생성, Route Table 생성 및 Nat Gateway 라우팅 설정 |
 | loginkey | Server 로그인 시 필요한 인증키 생성 및 저장  |
 | acg | ACG 생성 |
+| initscript | init script 생성 |
 | server | Network Interface 생성, Server 생성, Block Storage 생성 및 부착(default는 생성 안함), Public IP 생성 및 부착(default는 생성 안함) |
 | server_img | Network Interface 생성, 내 서버 이미지를 이용한 Server 생성, Block Storage 생성 및 부착(default는 생성 안함), Public IP 생성 및 부착(default는 생성 안함) |
 | acgrule | ACG InBound Rule 설정, OutBound Port 모두 Open |
@@ -77,6 +83,12 @@
 | vpc_no | ACG를 생성할 VPC ID 입력 |
 | acg_description | ACG 메모 입력 |
 
+## initscript
+| 변수이름 | 설명 |
+|--|--|
+| init_name | Script 이름 설정 |
+| file_name | Script 내용이 있는 파일 지정(Terraform 루트 디렉터리에 저장) |
+
 ## server
 | 변수이름 | 설명 |
 |--|--|
@@ -92,6 +104,7 @@
 | memory_size | Memory 크기 지정(GB 단위) |
 | server_description | Server 메모 입력 |
 | is_protect_server_termination | Server 반납보호 설정(true, false, 기본값 = false) |
+| init_script_no | init script 사용시 해당 init script ID 입력(기본은 사용안함) |
 | pubip | Public IP 사용 여부 설정(true,false) |
 | size | Block Storage 크기(GB 단위, 기본값 = 0) |
 | disk_detail_type | Block Storage 타입 지정(HDD, SSD, 기본값 = SSD) |
@@ -120,6 +133,7 @@
 | memory_size | Memory 크기 지정(GB 단위) |
 | server_description | Server 메모 입력 |
 | is_protect_server_termination | Server 반납보호 설정(true, false, 기본값 = false) |
+| init_script_no | init script 사용시 해당 init script ID 입력(기본은 사용안함) |
 | pubip | Public IP 사용 여부 설정(true,false) |
 | size | Block Storage 크기(GB 단위, 기본값 = 0) |
 | disk_detail_type | Block Storage 타입 지정(HDD, SSD, 기본값 = SSD) |
@@ -203,6 +217,7 @@
 | asg_conf_name | Launch Configuration 이름 설정 |
 | image_name | Auto Scaling Group에 사용할 Server Image 지정 |
 | login_key_name | Server에 사용할 인증키 이름 |
+| init_script_no | init script 사용시 해당 init script ID 입력(기본은 사용안함) |
 | product_type | Server 타입 지정(HICPU, HIMEM, STAND, GPU, CPU) |
 | product_code | Server의 Storage 타입 설정(HDD, SSD, 기본값 = SSD) |
 | cpu_count | CPU 갯수 지정 |
@@ -311,6 +326,7 @@
     * HIMEM : High-Memory
     * GPU : GPU
     * CPU : CPU Intensive
+
 
 # 외부 참조
 * [Ncloud Terraform](https://registry.terraform.io/providers/NaverCloudPlatform/ncloud/latest/docs)

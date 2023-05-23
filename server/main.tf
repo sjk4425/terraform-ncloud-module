@@ -17,6 +17,7 @@ resource "ncloud_server" "create_server" {
   description = var.server_description
   login_key_name            = var.loginkeyname
   is_protect_server_termination = var.is_protect_server_termination
+  init_script_no = var.init_script_no
   network_interface {
     network_interface_no = ncloud_network_interface.nic[count.index].id
     order = 0

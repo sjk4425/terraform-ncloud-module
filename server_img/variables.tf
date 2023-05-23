@@ -62,6 +62,11 @@ variable "is_protect_server_termination" {
   default = false
 }
 
+// init script 적용
+variable "init_script_no" {
+  type = string
+  default = ""
+}
 
 // Public IP 유무
 variable "pubip" {

@@ -69,6 +69,11 @@ variable "pubip" {
   default = false
 }
 
+// init script 적용
+variable "init_script_no" {
+  type = string
+  default = ""
+}
 
 // Block Stroage 설정
 //// Block Storage 크기

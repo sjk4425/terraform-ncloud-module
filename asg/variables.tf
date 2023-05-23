@@ -13,6 +13,12 @@ variable "login_key_name" {
   type = string
 }
 
+// init script 적용
+variable "init_script_no" {
+  type = string
+  default = ""
+}
+
 //// Server Type 선택(HICPU, HIMEM, STAND, GPU, CPU)
 variable "product_type" {
   type = string
