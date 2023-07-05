@@ -1,8 +1,10 @@
 // NAT GW 생성
 resource "ncloud_nat_gateway" "nat_gateway" {
-    vpc_no = var.vpc_no
-    zone = var.zone
-    name = var.natgw_name
+  vpc_no = var.vpc_no
+  subnet_no = var.subnet_no
+  zone = var.zone
+  name = var.natgw_name   
+  description = var.description
 }
 
 // private-route-table 생성
@@ -21,4 +23,3 @@ resource "ncloud_route" "route_setting" {
   target_name = ncloud_nat_gateway.nat_gateway.name
   target_no = ncloud_nat_gateway.nat_gateway.id
 }
-

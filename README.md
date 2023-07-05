@@ -4,6 +4,9 @@
 
 
 # 버전 기록
+## V1.2
+* 신규 Nat Gateway에 사용할 수 있도록 코드 변경
+
 ## V1.1
 * initscript 모듈 추가
 * 서버 생성에 관련된 모듈(server, server_img, asg) init script 적용가능하도록 기능 추가
@@ -58,7 +61,7 @@
 | subnet_CIDR | Subnet IP 대역 |
 | subnet_type | Subnet 타입 설정(Public, Private) |
 | subnet_name | Subnet 이름 정의 |
-| usage_type | Subnet 종류 선택_일반,LB용(GEN, LOADB) |
+| usage_type | Subnet 종류 선택_일반,LB용(GEN, LOADB, NATGW) |
 | route_table_no | Subnet에 정의할 Route Table ID 정의 |
 * usage_type
   * 일반 서버용 Subnet: GEN
@@ -68,8 +71,10 @@
 | 변수이름 | 설명 |
 |--|--|
 | vpc_no | Nat Gateway를 생성할 VPC ID 입력 |
+| subnet_no | Nat Gateway를 생성할 Subnet ID 입력 |
 | natgw_name | Nat Gateway 이름 설정 |
 | zone | Nat Gateway를 생성할 Zone 설정(예시 : KR-1, KR-2) |
+| description | Nat Gateway 메모 입력 |
 
 ## loginkey
 | 변수이름 | 설명 |
