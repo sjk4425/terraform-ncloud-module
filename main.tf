@@ -9,16 +9,6 @@ module "vpc" {
   vpc_name = "ksj-terraform-vpc"
 }
 
-/*
-// natgw 생성
-module "ngw" {
-  // ngw 모듈 사용
-  source = "./natgw"
-  vpc_no = module.vpc.vpc_no
-  natgw_name = "ngw-ksj-terraform"
-  zone = "KR-2"
-}
-*/
 
 // Public Subnet(WEB) 생성
 module "sub-web-dev" {
@@ -31,6 +21,7 @@ module "sub-web-dev" {
   subnet_CIDR = "172.16.200.0/24"
 }
 
+// LB용 Subnet 생성
 module "sub-lb-web-dev" {
   // subnet 모듈 사용
   source = "./subnet"
@@ -45,6 +36,28 @@ module "sub-lb-web-dev" {
   # route_table_no = module.ngw.route_table_no
 }
 
+// Nat Gateway용 Subnet 생성
+module "natgw-kr2" {
+  // subnet 모듈 사용
+  source = "./subnet"
+  vpc_no = module.vpc.vpc_no
+  zone = "KR-2"
+  subnet_name = "natgw-kr2"
+  subnet_type = "private"
+  subnet_CIDR = "172.16.240.0/24"
+  usage_type = "NATGW"
+}
+
+// Nat Gateway 생성
+module "natgw" {
+  // natgw 모듈 사용
+  source = "./natgw"
+  
+  vpc_no = module.vpc.vpc_no
+  subnet_no = module.natgw-kr2.subnet_no
+  zone = "KR-2"
+  natgw_name = "ksj-test-ngw"
+}
 
 // Application LoadBalancer 생성(HTTPS)
 //// Target Group 생성
